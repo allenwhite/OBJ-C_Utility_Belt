@@ -8,43 +8,43 @@
 
 #import "UserLocation.h"
 
-@implementation UserLocation 
+@implementation UserLocation
 
-CLLocationManager *locationManager;
 
-// another way to do a singleton, without using GCD
-+ (id)sharedManager {
-	static UserLocation *sharedManager = nil;
-	@synchronized(self) {
-		if (sharedManager == nil)
-			sharedManager = [[self alloc] init];
-			sharedManager.locationSet = NO;
-			if ([CLLocationManager locationServicesEnabled]) {
-				locationManager = [[CLLocationManager alloc] init];
-				locationManager.delegate = sharedManager;
-				if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-						[locationManager requestWhenInUseAuthorization];
-				}
-				locationManager.distanceFilter = kCLDistanceFilterNone;
-				locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-				[locationManager startUpdatingLocation];
-			}
++ (UserLocation *)sharedController
+{
+	static UserLocation *sharedController = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		sharedController = [[self alloc]init];
+	});
+	return sharedController;
+}
+
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		_locationManager = [[CLLocationManager alloc]init];
+		_locationManager.delegate = self;
+		_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+		_locationManager.distanceFilter = 30; // Meters.
 	}
-	return sharedManager;
+	return self;
 }
 
 
+#pragma mark - Location Manager
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+	[self.delegate locationControllerDidUpdateLocation:locations.lastObject];
+	[self setLocation:locations.lastObject];
+}
 
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-	if (status == kCLAuthorizationStatusDenied) {
-		//location denied, handle accordingly
-		self.locationSet = NO;
-	}else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-		self.locationSet = YES;
-		self.lat = [NSNumber numberWithFloat:locationManager.location.coordinate.latitude];
-		self.lon =[NSNumber numberWithFloat:locationManager.location.coordinate.longitude];
-	}
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+	// ...
 }
 
 

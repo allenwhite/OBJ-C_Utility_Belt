@@ -5,6 +5,7 @@
 //  Created by Allen White on 5/24/16.
 //  Copyright © 2016 Worldwide International. All rights reserved.
 //
+// http://stackoverflow.com/questions/32631184/the-resource-could-not-be-loaded-because-the-app-transport-security-policy-requi
 
 #import <AFNetworking/AFNetworking.h>
 #import "AFHTTPSessionManager.h"

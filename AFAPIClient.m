@@ -15,6 +15,7 @@ static NSString * const AFAPIBaseURLString = @"http://54.148.137.189:10211/";
 
 NSString *auth;
 
+//singleton using gcd
 + (instancetype)sharedClient:(NSString *)authID{
 	auth = authID;
 	static AFAPIClient *_sharedClient = nil;
@@ -47,7 +48,7 @@ NSString *auth;
 
 
 +(BOOL)requestSuccess:(NSDictionary *)json{
-	if (![json objectForKey:@"success"]) {
+	if (![[json objectForKey:@"success"] boolValue]) {
 		[Constants showAlert:@"Avast!" withMessage:[((NSDictionary *)json) objectForKey:@"error"]];
 		return NO;
 	}

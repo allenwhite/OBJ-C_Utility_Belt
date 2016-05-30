@@ -57,24 +57,24 @@
 }
 
 
-// 2015-07-03 21:26:22.124185
 +(NSString*)prettyTime:(NSString *)time{
+	// 2015-07-03 21:26:22.124185
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSSSS"];
 	return [[[dateFormatter dateFromString:time] dateByAddingTimeInterval:-14400] formattedAsTimeAgo];
 }
 
 
-// Sat, 25 Jul 2015 06:21:29 GMT
 +(NSString*)prettyTimeWithTimeZone:(NSString *)time{
+	// Sat, 25 Jul 2015 06:21:29 GMT
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss v"];
 	return [[dateFormatter dateFromString:time] formattedAsTimeAgo];
 }
 
 
-// Sat, 25 Jul 2015 06:21:29 GMT
 +(NSString*)formalTimeWithTimeZone:(NSString *)time{
+	// Sat, 25 Jul 2015 06:21:29 GMT
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss v"];
 	NSDate *date = [dateFormatter dateFromString:time];
@@ -84,6 +84,17 @@
 	//	[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
 	NSString *stringFromDate = [formatter stringFromDate:date];
 	return stringFromDate;
+}
+
+
+
++(UIColor *)r:(int)red g:(int)green b:(int)blue a:(float)alpha{
+	return [UIColor colorWithRed:(float)red/255.0f green:(float)green/255.0f blue:(float)blue/255.0f alpha:alpha];
+	
+}
+
++(UIColor *)finnaBlue{
+	return [self r:98 g:200 b:236 a:1];
 }
 
 

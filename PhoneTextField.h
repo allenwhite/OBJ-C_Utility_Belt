@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhoneTextField : UITextField
+@interface PhoneTextField : UITextField <UITextFieldDelegate>
 
 - (BOOL)isValidPhoneNum;
-
+@property (nonatomic) int maxchars;
+-(NSString *)getSimpleNumber;
 @end

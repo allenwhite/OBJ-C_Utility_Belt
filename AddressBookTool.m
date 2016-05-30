@@ -36,13 +36,52 @@
 
 
 + (NSArray *)getContacts{
+	//[
+	//	{
+	//		"firstname":"",
+	//		"lastname":"",
+	//		"phone":"",
+	//	}
+	// ]
 	ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
-	NSArray *contacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+	NSArray *ab_contacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookRef);
+	NSMutableArray *contacts = [NSMutableArray new];
+	
+	for (id record in ab_contacts){
+		ABRecordRef thisContact = (__bridge ABRecordRef)record;
+		CFTypeRef generalCFObject;
+		NSString *firstname = @"";
+		NSString *lastname = @"";
+		NSString *phone = @"";
+		generalCFObject = ABRecordCopyValue(thisContact, kABPersonFirstNameProperty);
+		if (generalCFObject) {
+			firstname = (__bridge NSString *)generalCFObject;
+			CFRelease(generalCFObject);
+		}
+		generalCFObject = ABRecordCopyValue(thisContact, kABPersonLastNameProperty);
+		if (generalCFObject) {
+			lastname = (__bridge NSString *)generalCFObject;
+			CFRelease(generalCFObject);
+		}
+		ABMultiValueRef phoneNumberMultiValue = ABRecordCopyValue(thisContact, kABPersonPhoneProperty);
+		NSUInteger phoneNumberIndex;
+		for (phoneNumberIndex = 0; phoneNumberIndex < ABMultiValueGetCount(phoneNumberMultiValue); phoneNumberIndex++) {
+			CFStringRef labelStingRef = ABMultiValueCopyLabelAtIndex (phoneNumberMultiValue, phoneNumberIndex);
+			NSString *phoneLabelLocalized = (__bridge NSString*)ABAddressBookCopyLocalizedLabel(labelStingRef);
+			if (![phoneLabelLocalized isEqualToString:@""]) {
+				phone  = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phoneNumberMultiValue, phoneNumberIndex);
+				//memory management
+				CFRelease(labelStingRef);
+			}
+		}
+		CFRelease(phoneNumberMultiValue);
+		[contacts addObject:@{@"firstname":firstname, @"lastname":lastname, @"phone":phone}];
+	}
 	CFRelease(addressBookRef);
-	return contacts;
+	return [contacts copy];
 }
 
-
+				    
 + (void)addContactFirstname:(NSString *)fname lastname:(NSString *)lname phoneNum:(NSString *)phone img:(NSData *)img{
 	ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
 	ABRecordRef person = ABPersonCreate();
@@ -72,8 +111,6 @@
 	CFRelease(addressBookRef);
 	[Constants showAlert:@"Contact Added" withMessage:nil];
 }
-
-
 
 
 @end

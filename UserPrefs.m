@@ -23,6 +23,7 @@ static NSString * const photoLinkDefaultString	= @"photoLinkDefaultString";
 
 
 + (void)setUserID:(NSString *)user_id{
+	NSLog(@"setUserID~~~~~~%@", user_id);
 	[[NSUserDefaults standardUserDefaults] setObject:user_id forKey:user_idDefaultString];
 }
 
@@ -62,43 +63,44 @@ static NSString * const photoLinkDefaultString	= @"photoLinkDefaultString";
 /////////////////////////////////////////// get ///////////////////////////////////////////
 
 + (NSString *)getUserID{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:user_idDefaultString];
+	NSLog(@"getUserID ~%@", [[NSUserDefaults standardUserDefaults] objectForKey:user_idDefaultString]);
+	NSLog(@"getUserID resutl ~%@", [[NSUserDefaults standardUserDefaults] objectForKey:user_idDefaultString] ?: @"");
+	return [[NSUserDefaults standardUserDefaults] objectForKey:user_idDefaultString] ?: @"";
 }
 
 
 + (NSString *)getUsername{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:usernameDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:usernameDefaultString] ?: @"";
 }
 
 
 + (NSString *)getFirstname{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:firstnameDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:firstnameDefaultString] ?: @"";
 }
 
 
 + (NSString *)getLastname{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:lastnameDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:lastnameDefaultString] ?: @"";
 }
 
 
 + (NSString *)getBio{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:bioDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:bioDefaultString] ?: @"";
 }
 
 
 + (NSString *)getPhone{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:phoneDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:phoneDefaultString] ?: @"";
 }
 
 
 + (NSString *)getToken{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:tokenDefaultString];
+	return [[NSUserDefaults standardUserDefaults] objectForKey:tokenDefaultString] ?: @"";
 }
 
 
 + (NSString *)getPhoto{
-	return [[NSUserDefaults standardUserDefaults] objectForKey:photoLinkDefaultString];
-	
+	return [[NSUserDefaults standardUserDefaults] objectForKey:photoLinkDefaultString] ?: @"";
 }
 
 
