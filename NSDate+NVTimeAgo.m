@@ -16,15 +16,18 @@
 #define WEEK    (DAY    * 7)
 #define YEAR    (DAY    * 365.24)
 
-+ (NSString *)mysqlDatetimeFormattedAsTimeAgo:(NSString *)mysqlDatetime
++ (NSString *)postgresDatetimeFormattedAsTimeAgo:(NSString *)postgresDatetime
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss v"];
 	
-	NSDate *date = [formatter dateFromString:mysqlDatetime];
+	NSDate *date = [formatter dateFromString:postgresDatetime];
 	
 	return [date formattedAsTimeAgo];
 }
+
+
+
 
 
 - (NSString *)formattedAsTimeAgo

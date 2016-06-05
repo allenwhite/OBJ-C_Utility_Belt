@@ -13,6 +13,6 @@
 
 +(void)loadImageFor:(UIImageView *)imageView withRemoteURL:(NSString *)url;
 +(NSString *)sendPicAtFilepath:(NSString *)filepath;
-+ (void) setUserPhoto:(UIImageView *)userImageView;
++ (void) makeRoundPhoto:(UIImageView *)userImageView;
 
 @end

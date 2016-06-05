@@ -9,7 +9,7 @@
 
 @interface NSDate (NVFacebookTimeAgo)
 
-+ (NSString*)mysqlDatetimeFormattedAsTimeAgo:(NSString *)mysqlDatetime;
++ (NSString *)postgresDatetimeFormattedAsTimeAgo:(NSString *)postgresDatetime;
 
 - (NSString *)formattedAsTimeAgo;
 

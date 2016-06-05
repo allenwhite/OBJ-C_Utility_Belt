@@ -19,6 +19,7 @@ static NSString * const bioDefaultString			= @"bioDefaultString";
 static NSString * const phoneDefaultString		= @"phoneDefaultString";
 static NSString * const tokenDefaultString		= @"tokenDefaultString";
 static NSString * const photoLinkDefaultString	= @"photoLinkDefaultString";
+static NSString * const devicePushDefaultString	= @"devicePushDefaultString";
 
 
 
@@ -58,6 +59,10 @@ static NSString * const photoLinkDefaultString	= @"photoLinkDefaultString";
 
 + (void)setPhoto:(NSString *)photoLink{
 	[[NSUserDefaults standardUserDefaults] setObject:photoLink forKey:photoLinkDefaultString];
+}
+
++ (void)setDevicePushToken:(NSString *)token{
+	[[NSUserDefaults standardUserDefaults] setObject:token forKey:devicePushDefaultString];
 }
 
 /////////////////////////////////////////// get ///////////////////////////////////////////
@@ -103,5 +108,8 @@ static NSString * const photoLinkDefaultString	= @"photoLinkDefaultString";
 	return [[NSUserDefaults standardUserDefaults] objectForKey:photoLinkDefaultString] ?: @"";
 }
 
++ (NSString *)getDevicePushToken{
+	return [[NSUserDefaults standardUserDefaults] objectForKey:devicePushDefaultString] ?: @"";
+}
 
 @end

@@ -18,6 +18,7 @@
 + (void)setPhone:(NSString *)phone;
 + (void)setPhoto:(NSString *)photoLink;
 + (void)setToken:(NSString *)token;
++ (void)setDevicePushToken:(NSString *)token;
 
 + (NSString *)getUserID;
 + (NSString *)getUsername;
@@ -27,5 +28,6 @@
 + (NSString *)getPhone;
 + (NSString *)getPhoto;
 + (NSString *)getToken;
++ (NSString *)getDevicePushToken;
 
 @end

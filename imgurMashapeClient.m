@@ -86,7 +86,7 @@
 }
 
 
-+ (void) setUserPhoto:(UIImageView *)userImageView{
++ (void) makeRoundPhoto:(UIImageView *)userImageView{
 	userImageView.layer.cornerRadius = userImageView.frame.size.height / 2.0;
 	userImageView.layer.masksToBounds = YES;
 	userImageView.layer.shouldRasterize = YES;
