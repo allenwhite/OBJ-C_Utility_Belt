@@ -1,7 +1,9 @@
 # OBJ-C_Utility_Belt
 Utility Belt Models Designed to Speed up iOS Dev in OBJ C
 Independent files designed to be added to a project to encompass needed functionality
-its a work in progress... soon to be open source, or sold on the black market
+
+This collection of files could be expanded and placed in a library
+Swift Version coming soon but a bridging header will get you there
 
 ### AddressBookTool 
 * designed for phone contact interactions
