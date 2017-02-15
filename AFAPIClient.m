@@ -46,7 +46,7 @@ NSString *auth;
 	return [super dataTaskWithRequest:req completionHandler:completionHandler];
 }
 
-
+// expects a top level success indication, i.e {"success":true, ...}
 +(BOOL)requestSuccess:(NSDictionary *)json{
 	if (![[json objectForKey:@"success"] boolValue]) {
 		[Constants showAlert:@"Avast!" withMessage:[((NSDictionary *)json) objectForKey:@"error"]];
