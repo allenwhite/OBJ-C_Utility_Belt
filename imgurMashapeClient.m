@@ -27,7 +27,7 @@
 	NSString *base64EncodedString = [data base64EncodedStringWithOptions:0];
 	// These code snippets use an open-source library. http://unirest.io/objective-c
 	NSDictionary *headers = @{
-				  @"X-Mashape-Key": @"c2wuh74HjDmshLVne6AgEpjtm3eBp1G8LJ1jsn0XwgouDnMgHh",
+				  @"X-Mashape-Key": @"<your-key-here>",
 				  @"Authorization": @"Client-ID ebf2a9c0fa18b2b",
 				  @"Content-Type": @"application/x-www-form-urlencoded",
 				  @"Accept": @"application/json"
